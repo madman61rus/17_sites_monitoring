@@ -1,2 +1,2 @@
 requests==2.11.1
-pythonwhois
+python-whois-extended==0.6.10

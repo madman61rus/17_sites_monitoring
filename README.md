@@ -20,9 +20,14 @@ python check_sites_health.py -f sites.txt
 
 Пример вывода на консоль :
 ```
-
+OK  Ответ от сервера http://yandex.ru - 200, количество оставшихся дней до окончания делегирования - 263
+OK  Ответ от сервера http://yaplakal.com - 200, количество оставшихся дней до окончания делегирования - 121
+OK  Ответ от сервера http://mkb-leasing.ru - 200, количество оставшихся дней до окончания делегирования - 315
+OK  Ответ от сервера http://habrahabr.ru - 200, количество оставшихся дней до окончания делегирования - 97
+Внимание ! Домен http://herthez.ru не найден
+OK  Ответ от сервера http://httpstat.us - 200, количество оставшихся дней до окончания делегирования - 388
 ```
 
-# Project Goals
+# Цели проекта
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+Проект написан с целью обучения. Курс для веб-разработчиков - [DEVMAN.org](https://devman.org)

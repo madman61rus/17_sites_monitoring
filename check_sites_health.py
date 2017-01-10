@@ -1,14 +1,13 @@
 import argparse
 import requests
 import datetime
-import pythonwhois
-from os import path
+import whois
 
 def load_urls4check(path):
     try:
         with open(path) as file:
             return [line for line in file.read().splitlines()]
-    except IOError as error:
+    except IOError:
         print ('Не могу прочитать файл')
         return None
 
@@ -21,17 +20,15 @@ def is_server_respond_with_200(url):
         else:
             return False
     except requests.exceptions.ConnectionError:
-        print('Сайт {} не существует'.format(url))
         return None
 
 def get_domain_expiration_date(domain_name):
-    who =  pythonwhois.get_whois(domain_name.split('//')[1])
-    return who['expiration_date'][0]
+    who =  whois.query(domain_name.split('//')[1])
+    return who.expiration_date
 
 def print_results(url, respond_200,expiration):
     if respond_200 == None:
         return None
-    print(expiration,respond_200)
 
     if respond_200 == True and expiration > 31:
         print ('OK  Ответ от сервера {} - 200, количество оставшихся дней до окончания делегирования - {}'
@@ -46,6 +43,12 @@ if __name__ == '__main__':
     arguments = args.parse_args()
     urls=load_urls4check(arguments.file)
     for url in urls:
-        days =  get_domain_expiration_date(url) - datetime.datetime.now()
-        print_results(url, is_server_respond_with_200(url), days.days)
+        response = is_server_respond_with_200(url)
+        if response is None:
+            print('Внимание ! Домен {} не найден'.format(url))
+        else:
+            days =  get_domain_expiration_date(url) - datetime.datetime.now()
+            print_results(url,response , days.days)
+
+
 
