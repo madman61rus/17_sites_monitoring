@@ -30,7 +30,7 @@ def print_results(url, respond_200,expiration):
     if respond_200 == None:
         return None
 
-    if respond_200 == True and expiration > 31:
+    if respond_200 and expiration > 31:
         print ('OK  Ответ от сервера {} - 200, количество оставшихся дней до окончания делегирования - {}'
                .format(url, expiration))
     else:
